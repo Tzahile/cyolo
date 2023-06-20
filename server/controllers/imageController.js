@@ -8,7 +8,7 @@ const readImage = (filename) =>
 const addFileToCollector = (filename, retention) => {
   console.log("filename", filename);
   console.log("retention", retention);
-  setTimeout(() => {
+  return setTimeout(() => {
     fs.unlink(path.join(imagesPath, filename), (err) => {
       if (err) throw err;
       console.log("file was deleted");

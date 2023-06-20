@@ -16,10 +16,17 @@ const upload = multer({
 const router = express.Router();
 
 router.get("/:url", (req, res) => {
+
   const { url } = req.params;
-  const requestedFile = readImage(url);
-  res.writeHead(200, { "Content-Type": "image/jpeg" });
-  return res.end(requestedFile);
+  try {
+
+    const requestedFile = readImage(url);
+    res.writeHead(200, { "Content-Type": "image/jpeg" });
+    return res.end(requestedFile);
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send("URL was not found");
+  }
 });
 
 router.put("/file", upload.single("image"), (req, res) => {
